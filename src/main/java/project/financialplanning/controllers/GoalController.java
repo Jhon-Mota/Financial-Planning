@@ -20,7 +20,7 @@ public class GoalController {
     @PostMapping
     private String createGoal(@RequestBody GoalDto dto) {
         this.service.createGoal(dto);
-        return "Your goal was been created!";
+        return "Your goal was been created.";
     }
 
     @GetMapping
