@@ -5,6 +5,8 @@ import project.financialplanning.dtos.GoalDto;
 import project.financialplanning.models.Goal;
 import project.financialplanning.repositories.GoalRepository;
 
+import java.util.List;
+
 
 @Service
 public class GoalService {
@@ -28,4 +30,10 @@ public class GoalService {
 
         return repository.save(goal);
     }
+
+    public List<Goal> showAllGoals() {
+        return this.repository.findAll();
+    }
+
 }
+

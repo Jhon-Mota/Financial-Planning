@@ -1,11 +1,11 @@
 package project.financialplanning.controllers;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.financialplanning.dtos.GoalDto;
+import project.financialplanning.models.Goal;
 import project.financialplanning.services.GoalService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/goal")
@@ -23,6 +23,10 @@ public class GoalController {
         return "Your goal was been created!";
     }
 
+    @GetMapping
+    private List<Goal> showAll() {
+        return this.service.showAllGoals();
+    }
 
 
 }
