@@ -30,7 +30,7 @@ public class GoalController {
     }
 
     @GetMapping("/{goal}")
-    private Optional<Goal> findOne(@PathVariable(value = "goal") String goalTitle) {
+    private List<Goal> findOne(@PathVariable(value = "goal") String goalTitle) {
 
         return this.service.findGoal(goalTitle);
     }

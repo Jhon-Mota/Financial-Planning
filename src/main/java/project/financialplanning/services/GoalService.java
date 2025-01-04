@@ -37,8 +37,8 @@ public class GoalService {
         return this.repository.findAll();
     }
 
-    public Optional<Goal> findGoal(String goalTitle) {
-        Optional<Goal> goal = this.repository.findByGoal(goalTitle);
+    public List<Goal> findGoal(String goalTitle) {
+        List<Goal> goal = this.repository.findByGoal(goalTitle);
 
         if(goal.isEmpty()) throw new GoalNotFindException();
 
