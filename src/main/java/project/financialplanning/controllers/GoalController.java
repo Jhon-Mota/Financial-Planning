@@ -6,6 +6,7 @@ import project.financialplanning.models.Goal;
 import project.financialplanning.services.GoalService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/goal")
@@ -28,5 +29,10 @@ public class GoalController {
         return this.service.showAllGoals();
     }
 
+    @GetMapping("/{goal}")
+    private Optional<Goal> findOne(@PathVariable(value = "goal") String goalTitle) {
+
+        return this.service.findGoal(goalTitle);
+    }
 
 }
