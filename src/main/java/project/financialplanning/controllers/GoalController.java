@@ -6,7 +6,6 @@ import project.financialplanning.models.Goal;
 import project.financialplanning.services.GoalService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/goal")

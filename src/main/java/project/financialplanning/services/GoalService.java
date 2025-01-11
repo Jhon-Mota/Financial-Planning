@@ -2,6 +2,7 @@ package project.financialplanning.services;
 
 import org.springframework.stereotype.Service;
 import project.financialplanning.dtos.GoalDto;
+import project.financialplanning.dtos.GoalDtoUpdate;
 import project.financialplanning.exceptions.GoalNotFindException;
 import project.financialplanning.models.Goal;
 import project.financialplanning.repositories.GoalRepository;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @Service
 public class GoalService {
 
-    private GoalRepository repository;
+    private final GoalRepository repository;
 
     public GoalService(GoalRepository repository) {
         this.repository = repository;
@@ -43,6 +44,16 @@ public class GoalService {
         if(goal.isEmpty()) throw new GoalNotFindException();
 
         return goal;
+    }
+
+    public Goal updateGoal(Long goalId, GoalDtoUpdate dto) {
+        Optional<Goal> goalData = this.repository.findById(goalId);
+        VerifyIfFieldsAreEmpty verify = new VerifyIfFieldsAreEmpty(dto);
+
+        if(goalData.isEmpty()) throw new GoalNotFindException();
+
+
+
 
     }
 
