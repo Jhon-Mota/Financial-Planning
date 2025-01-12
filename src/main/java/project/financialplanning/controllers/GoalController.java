@@ -2,6 +2,7 @@ package project.financialplanning.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import project.financialplanning.dtos.GoalDto;
+import project.financialplanning.dtos.GoalDtoUpdate;
 import project.financialplanning.models.Goal;
 import project.financialplanning.services.GoalService;
 
@@ -34,4 +35,11 @@ public class GoalController {
         return this.service.findGoal(goalTitle);
     }
 
+    @PutMapping("/{id}")
+    private String updateGoal(@PathVariable Long id, @RequestBody GoalDtoUpdate goalInfo) {
+        this.service.updateGoal(id, goalInfo);
+        return "Your goal has been update";
+    }
+
 }
+

@@ -48,11 +48,15 @@ public class GoalService {
 
     public Goal updateGoal(Long goalId, GoalDtoUpdate dto) {
         Optional<Goal> goalData = this.repository.findById(goalId);
-        VerifyIfFieldsAreEmpty verify = new VerifyIfFieldsAreEmpty(dto);
+        VerifyIfFieldsAreEmpty verify = new VerifyIfFieldsAreEmpty();
 
         if(goalData.isEmpty()) throw new GoalNotFindException();
 
+        verify.VerifyFields(dto);
 
+        Goal goalInfo = verify.VerifyFields(dto);
+
+        return this.repository.save(goalInfo);
 
 
     }
