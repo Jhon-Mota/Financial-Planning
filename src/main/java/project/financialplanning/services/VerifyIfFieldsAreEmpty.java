@@ -14,7 +14,7 @@ public class VerifyIfFieldsAreEmpty {
 
         if(!dto.goal().isBlank()) goal.setGoal(dto.goal());
 
-        if(!dto.description().isBlank()) goal.setGoal(dto.description());
+        if(!dto.description().isBlank()) goal.setDescription(dto.description());
 
         //Blank doens't work in BigDecimal.
         if(dto.goalValue().compareTo(dto.goalValue()) > 0) goal.setGoalValue(dto.goalValue());

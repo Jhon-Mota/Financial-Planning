@@ -7,6 +7,7 @@ import project.financialplanning.exceptions.GoalNotFindException;
 import project.financialplanning.models.Goal;
 import project.financialplanning.repositories.GoalRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,16 +48,18 @@ public class GoalService {
     }
 
     public Goal updateGoal(Long goalId, GoalDtoUpdate dto) {
-        Optional<Goal> goalData = this.repository.findById(goalId);
-        VerifyIfFieldsAreEmpty verify = new VerifyIfFieldsAreEmpty();
+        Goal goal = this.repository.findById(goalId).orElseThrow(() -> new GoalNotFindException());
+        
+        if(!dto.goal().isBlank()) goal.setGoal(dto.goal());
 
-        if(goalData.isEmpty()) throw new GoalNotFindException();
+        if(!dto.description().isBlank()) goal.setDescription(dto.description());
 
-        verify.VerifyFields(dto);
+        //Blank doens't work in BigDecimal.
+        if(dto.goalValue().compareTo(BigDecimal.ZERO) > 0) goal.setGoalValue(dto.goalValue());
 
-        Goal goalInfo = verify.VerifyFields(dto);
+        if(dto.presentValue() != null) goal.setPresentValue(dto.presentValue());
 
-        return this.repository.save(goalInfo);
+        return this.repository.save(goal);
 
 
     }
