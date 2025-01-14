@@ -41,5 +41,11 @@ public class GoalController {
         return "Your goal has been update";
     }
 
+    @DeleteMapping("/{id}")
+    private String deleteGoal(@PathVariable Long id) {
+        this.service.deleteGoal(id);
+        return "Goal deleted";
+    }
+
 }
 

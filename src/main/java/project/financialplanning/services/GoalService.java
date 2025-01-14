@@ -48,20 +48,22 @@ public class GoalService {
     }
 
     public Goal updateGoal(Long goalId, GoalDtoUpdate dto) {
-        Goal goal = this.repository.findById(goalId).orElseThrow(() -> new GoalNotFindException());
         
+        Goal goal = this.repository.findById(goalId).orElseThrow(() -> new GoalNotFindException());
+    
         if(!dto.goal().isBlank()) goal.setGoal(dto.goal());
 
         if(!dto.description().isBlank()) goal.setDescription(dto.description());
 
-        //Blank doens't work in BigDecimal.
         if(dto.goalValue().compareTo(BigDecimal.ZERO) > 0) goal.setGoalValue(dto.goalValue());
 
         if(dto.presentValue() != null) goal.setPresentValue(dto.presentValue());
 
         return this.repository.save(goal);
+    }
 
-
+    public void deleteGoal(Long id) {
+        this.repository.deleteById(id);
     }
 
 }
