@@ -9,7 +9,6 @@ import project.financialplanning.repositories.GoalRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -63,6 +62,8 @@ public class GoalService {
     }
 
     public void deleteGoal(Long id) {
+        this.repository.findById(id).orElseThrow(() -> new GoalNotFindException());
+        
         this.repository.deleteById(id);
     }
 
