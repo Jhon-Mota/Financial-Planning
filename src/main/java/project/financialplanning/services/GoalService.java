@@ -3,7 +3,7 @@ package project.financialplanning.services;
 import org.springframework.stereotype.Service;
 import project.financialplanning.dtos.GoalDto;
 import project.financialplanning.dtos.GoalDtoUpdate;
-import project.financialplanning.exceptions.GoalNotFindException;
+import project.financialplanning.exceptions.GoalNotFoundException;
 import project.financialplanning.models.Goal;
 import project.financialplanning.repositories.GoalRepository;
 
@@ -41,14 +41,14 @@ public class GoalService {
     public List<Goal> findGoal(String goalTitle) {
         List<Goal> goal = this.repository.findByGoal(goalTitle);
 
-        if(goal.isEmpty()) throw new GoalNotFindException();
+        if(goal.isEmpty()) throw new GoalNotFoundException();
 
         return goal;
     }
 
     public Goal updateGoal(Long goalId, GoalDtoUpdate dto) {
         
-        Goal goal = this.repository.findById(goalId).orElseThrow(() -> new GoalNotFindException());
+        Goal goal = this.repository.findById(goalId).orElseThrow(() -> new GoalNotFoundException());
     
         if(!dto.goal().isBlank()) goal.setGoal(dto.goal());
 
@@ -62,7 +62,7 @@ public class GoalService {
     }
 
     public void deleteGoal(Long id) {
-        this.repository.findById(id).orElseThrow(() -> new GoalNotFindException());
+        this.repository.findById(id).orElseThrow(() -> new GoalNotFoundException());
         
         this.repository.deleteById(id);
     }
